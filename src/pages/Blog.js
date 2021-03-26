@@ -1,16 +1,27 @@
 import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, useParams} from 'react-router-dom';
+import posts from '../data/posts.json'
 
-function Blog() {
-    const [isAuthenticated, toggleIsAuthenticated] = useState(true);
-
-    return (
-        <>
-            {!isAuthenticated ? <Redirect to="/home" /> :
-            <p>Hier komt de juiste blogpost te staan
-            </p>}
-        </>
-    )
+function searchData(link) {
+    let title = ""
+    let content = "";
+    for (const post of posts) {
+        if (post.id === link.id) {
+            title = post.title;
+            content = post.content;
+        }
+    }
+    return <><h1>{title}</h1><p>{content}</p></>
 }
 
-export default Blog;
+    function Blog({isAuthenticated}) {
+    const url=useParams()
+
+        return (<>
+                {!isAuthenticated ? <Redirect to="/home"/> :
+                    searchData(url)}
+            </>
+        )
+    }
+
+    export default Blog;

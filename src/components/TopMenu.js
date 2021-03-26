@@ -1,33 +1,37 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import React from 'react';
+import {NavLink} from 'react-router-dom';
 
-function TopMenu() {
-    const [isAuthenticated, toggleIsAuthenticated] = useState(true);
+function TopMenu({isAuthenticated, toggleIsAuthenticated}) {
+
+    function handleClick() {
+        toggleIsAuthenticated(false);
+    }
 
     return (
         <nav>
             <ul>
-                <Link to='/'>
+                <NavLink to='/' exact activeClassName="active-link">
                     <li>Home</li>
-                </Link>
+                </NavLink>
                 {isAuthenticated &&
-                <Link to='/'>
-                    <li onClick={() =>{toggleIsAuthenticated(false)}}>Log uit</li>
-                </Link>
+                <NavLink to='/' exact activeClassName="active-link">
+                    <li onClick={() => handleClick()}
+                    >Log uit</li>
+                </NavLink>
                 }
                 {!isAuthenticated &&
-                    <Link to='/login'>
+                    <NavLink to='/login' activeClassName="active-link">
                         <li>Log in</li>
-                    </Link>
+                    </NavLink>
                 }
                 {isAuthenticated &&
-                <Link to='/blogposts'>
+                <NavLink to='/blogposts' activeClassName="active-link">
                     <li>Blogposts</li>
-                </Link>
+                </NavLink>
                 }
-                <Link to='/blog'>
+                <NavLink to='/blog' activeClassName="active-link">
                     <li>Blog</li>
-                </Link>
+                </NavLink>
             </ul>
         </nav>
     )

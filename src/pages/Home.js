@@ -2,7 +2,10 @@ import React from 'react';
 
 function Home() {
     return (
-        <p>Dit is de homepagina</p>
+        <>
+        <h1>Welkom op de homepagina</h1>
+        <p>Log in om de andere onderdelen te bekijken!</p>
+        </>
     )
 }
 

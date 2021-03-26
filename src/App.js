@@ -4,7 +4,6 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    useParams,
 } from 'react-router-dom';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -17,26 +16,32 @@ import {Link} from 'react-router-dom';
 
 function App() {
     // We houden in de state bij of iemand is "ingelogd" (simpele versie)
-    const [isAuthenticated, toggleIsAuthenticated] = useState(true);
-    console.log(posts);
+    const [isAuthenticated, toggleIsAuthenticated] = useState(false);
 
     return (
 
         <>
-            <TopMenu/>
+            <TopMenu
+                isAuthenticated={isAuthenticated}
+                toggleIsAuthenticated={toggleIsAuthenticated}
+            />
 
             <Switch>
                 <Route exact path='/'>
                     <Home/>
                 </Route>
                 <Route path='/login'>
-                    <Login/>
+                    <Login
+                        isAuthenticated={isAuthenticated}
+                        toggleIsAuthenticated={toggleIsAuthenticated}
+                    />
                 </Route>
                 <Route path='/blogposts'>
                     <Blogposts/>
                 </Route>
                 <Route path='/blog/:id'>
-                    <Blog/>
+                    <Blog
+                        isAuthenticated={isAuthenticated}/>
                 </Route>
             </Switch>
         </>
